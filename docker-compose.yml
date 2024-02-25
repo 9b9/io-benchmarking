@@ -1,0 +1,23 @@
+services:
+  env1:
+    build: .
+    # command: tail -f /dev/null
+    volumes:
+      - shared-tmpfs:/tmpfs
+      - shared-volume:/disk
+      - ./reports:/reports
+  # env2:
+  #   build: .
+  #   command: tail -f /dev/null
+  #   volumes:
+  #     - shared-tmpfs:/tmpfs
+  #     - shared-volume:/disk
+
+volumes:
+  shared-tmpfs:
+    driver: local
+    driver_opts:
+      type: "tmpfs"
+      device: "tmpfs"
+      o: "size=256m,uid=1000"
+  shared-volume:
